@@ -31,3 +31,9 @@ If you build an API, you must build a script or test suite that allows the agent
 
 ### 3. Agent Legibility (The "Context" Loop)
 Ensure that the codebase is readable for an LLM. Use high-level maps (like `AGENTS.md`) instead of sprawling documentation. Ensure that S3/DB dependencies can be run entirely offline via `docker-compose.agentland-services.yaml` so the agent never needs external credentials to exercise the system.
+
+### 4. Living Documentation (`lat.md/`)
+The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress.
+- **Document New Contributions:** Every new feature, service, or architectural component must be documented here.
+- **Document Conventions:** Any new codebase conventions, patterns, or harness engineering rules must be clearly explained so future agents can learn them.
+- **Bonus (Connections to Blueprints):** Whenever possible, explicitly link these documentation pages directly to the Software Factory Blueprints (`@BlueprintName`) that originated the architecture. This connects the original "plan" to the final "documentation."

@@ -68,6 +68,7 @@ Execute the test plan using the `testing` agent skill. The `testing` skill is st
 - [ ] All acceptance criteria from the work order and linked requirements are satisfied
 - [ ] Architecture is aligned with linked blueprints
 - [ ] **Agent Development Harness Updated:** A matching contribution to the repo was made (tests, hooks, simulation scripts) allowing the agent to run, exercise, and audit the new functionality completely.
+- [ ] **Living Documentation (`lat.md/`) Updated:** New contributions, architectural choices, and any newly established conventions are documented. Connections to the originating Blueprints are explicitly linked (Bonus).
 - [ ] Any drift is documented and reviewed with user
 
 ### Test Results Summary

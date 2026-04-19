@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Agentland",
   description: "Documentation for the Agentland project",
-  // base: '/agentland/', // Uncomment this if publishing to a subdirectory like GitHub Pages (username.github.io/agentland)
+  base: '/agentland/', // Required for GitHub Pages deployment under a repository
   
   themeConfig: {
     nav: [
