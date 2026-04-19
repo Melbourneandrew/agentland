@@ -1,5 +1,11 @@
 # Root Makefile for Agentland
 #
+# ⚠️ CRITICAL INSTRUCTION ⚠️
+# This Makefile is the WELL-DOCUMENTED ENTRYPOINT for ALL local development commands.
+# It is EXCLUSIVELY for local development, testing, and agent harness execution.
+# DO NOT use anything from this Makefile in deployed environments.
+# Deployment is handled entirely via CI/CD pipelines.
+#
 # All project-related scripts and checks should go through here.
 # We utilize scripts/quiet-run.sh to keep LLM context token usage down on successful runs.
 
