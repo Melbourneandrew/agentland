@@ -13,6 +13,12 @@
   - [ ] All `@BlueprintName` mentions followed and referenced blueprints read
   - Notes:
 
+## Phase 0: Handoff Verification
+- [ ] Checked previous work order execution checklist for completion
+- [ ] Checked previous work order review log for success
+- [ ] Confirmed CI checks passed on previous PR
+- [ ] **Merged previous work order PR into main branch** (or verified it was already merged)
+
 ## Phase 1: Start / Context Gathering
 
 ### Required Steps
@@ -30,7 +36,7 @@
 
 ### Implementation Plan
 - [ ] Reuse-first discovery pass attested in `implementation-plan.md` (what is reused, what is extracted, or why net-new code is needed)
-- [ ] Implementation plan written to `implementation-plan.md` in this directory (see `.cursor/skills/software-factory/writing-implementation-plans.md`)
+- [ ] Implementation plan written to `implementation-plan.md` in this directory (see `.agents/skills/software-factory/writing-implementation-plans.md`)
 - [ ] Plan reviewed with user (if scope warrants it)
 
 ### Implementation
@@ -46,7 +52,7 @@
 
 ## Phase 3: Verification
 
-Use the `review` skill (`.cursor/skills/review/SKILL.md`) to run all three review dimensions. Results should be written to the review log (`review-log.md` in this directory).
+Use the `review` skill (`.agents/skills/review/SKILL.md`) to run all three review dimensions. Results should be written to the review log (`review-log.md` in this directory).
 
 ### Quality Gates
 - [ ] **Linting & type checking** — run via the review skill's linting-and-type-checking.md guide

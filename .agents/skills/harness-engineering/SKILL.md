@@ -27,6 +27,8 @@ If you build an API, you must build a script or test suite that allows the agent
 
 ### 2. Architectural Constraints (The "Audit" Loop)
 - **Pre-commit Hooks:** Any new convention (e.g., a specific folder structure, a ban on certain imports) should be enforced via standard `.pre-commit-config.yaml` or project `Makefile`.
+- **Baseline Quality:** For **every app/service** added to the project (clients, backend services), you **must** configure linting, type-checking, and code formatting. These must run locally via pre-commit (`make check`) AND be verified in CI.
+- **Continuous Integration (GitHub Actions):** Whenever new kinds of tests, checks, or services are added, you must set up or update the corresponding GitHub Actions workflows to ensure these quality gates are continuously enforced on all pull requests.
 - **Hard Failures:** If an agent violates a rule, the CI system must block it. The error must be formatted so it can be injected directly back into the agent's context for fixing.
 
 ### 3. Agent Legibility (The "Context" Loop)

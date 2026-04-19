@@ -5,7 +5,15 @@ Gather enough context to implement correctly before writing code.
 
 ## Workflow
 
-### 1. Resume or initialize the execution directory
+### 1. Previous Work Order Handoff (PR Merge)
+
+**CRITICAL:** Before beginning any new work, you must verify the state of the *previous* work order.
+- Check the previous work order's execution directory (`.wo-executions/WO-<prev-number>/`).
+- Verify that its checklist is fully complete, its review log passed successfully, and its GitHub Actions checks are green.
+- If everything passes, **merge the previous work order's Pull Request** into the main branch.
+- If it fails or is incomplete, stop and fix the previous work order before starting the new one.
+
+### 2. Resume or initialize the execution directory
 
 First check whether `.wo-executions/WO-<number>/` already exists.
 
@@ -13,7 +21,7 @@ First check whether `.wo-executions/WO-<number>/` already exists.
 - **If it does not exist:** initialize it:
 
 ```bash
-bash .cursor/skills/software-factory/scripts/init-wo-execution.sh \
+bash .agents/skills/software-factory/scripts/init-wo-execution.sh \
   --work-order-number "<number>" \
   --work-order-title "<title>"
 ```
@@ -60,8 +68,8 @@ Write the implementation plan to `.wo-executions/WO-<number>/implementation-plan
 
 - Keep messages concise and operational.
 - Always tie implementation and completion checks back to work order scope, requirements acceptance criteria, and blueprint architecture.
-- Use `.cursor/skills/review/SKILL.md` for code review (linting, blueprint alignment, architecture & conventions).
-- Use `.cursor/skills/testing/SKILL.md` for test execution order and command flags.
+- Use `.agents/skills/review/SKILL.md` for code review (linting, blueprint alignment, architecture & conventions).
+- Use `.agents/skills/testing/SKILL.md` for test execution order and command flags.
 
 ## Why This Matters
 
