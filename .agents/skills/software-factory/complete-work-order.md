@@ -5,18 +5,18 @@ Run final verification, complete the work order, and capture handoff notes.
 
 ## Workflow
 
-1. **Review the checklist** — open `scratch/wo-execution/WO-<number>/checklist.md` and confirm:
+1. **Review the checklist** — open `.wo-executions/WO-<number>/checklist.md` and confirm:
    - All phase certifications are checked
    - No unchecked items remain (every item is checked or marked `[SKIP]` with a reason)
    - Notes and summaries are filled in
 
-2. **Review the context file** — open `scratch/wo-execution/WO-<number>/context.md` and confirm:
+2. **Review the context file** — open `.wo-executions/WO-<number>/context.md` and confirm:
    - Work order identifiers are filled in
    - User request summary is captured in 1-2 sentences
    - Requirement and blueprint document ID + title are filled in
    - Pull request URL is up to date
 
-3. **Review the review log** — open `scratch/wo-execution/WO-<number>/review-log.md` and confirm:
+3. **Review the review log** — open `.wo-executions/WO-<number>/review-log.md` and confirm:
    - The final round's verdict is **REVIEW AGENT APPROVED ✅** (zero blocking findings)
    - If the verdict is **REVIEW AGENT REQUESTED CHANGES ❌**, resolve the blocking findings and run another review round before proceeding
 

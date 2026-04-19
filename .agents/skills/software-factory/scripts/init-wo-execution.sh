@@ -6,7 +6,7 @@ print_usage() {
   echo "  bash .cursor/skills/software-factory/scripts/init-wo-execution.sh \\"
   echo "    --work-order-number <number> --work-order-title \"<title>\""
   echo
-  echo "Creates: scratch/wo-execution/WO-<number>/"
+  echo "Creates: .wo-executions/WO-<number>/"
   echo "  - checklist.md            Execution checklist (fill out progressively)"
   echo "  - context.md              Work order metadata, links, and delivery context"
   echo "  - review-log.md           Review log (written by review agents)"
@@ -68,7 +68,7 @@ for entry in "${TEMPLATES[@]}"; do
   fi
 done
 
-OUTPUT_DIR="scratch/wo-execution/WO-${WORK_ORDER_NUMBER}"
+OUTPUT_DIR=".wo-executions/WO-${WORK_ORDER_NUMBER}"
 mkdir -p "$OUTPUT_DIR"
 
 INITIALIZED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"

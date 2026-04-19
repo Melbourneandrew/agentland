@@ -7,7 +7,7 @@ Gather enough context to implement correctly before writing code.
 
 ### 1. Resume or initialize the execution directory
 
-First check whether `scratch/wo-execution/WO-<number>/` already exists.
+First check whether `.wo-executions/WO-<number>/` already exists.
 
 - **If it exists:** resume from the existing execution files and continue from the current checklist phase.
 - **If it does not exist:** initialize it:
@@ -54,7 +54,7 @@ Complete the checklist incrementally throughout execution. Check items off immed
 
 ### 4. Write the implementation plan
 
-Write the implementation plan to `scratch/wo-execution/WO-<number>/implementation-plan.md` (see [writing-implementation-plans.md](writing-implementation-plans.md) for structure and guidance).
+Write the implementation plan to `.wo-executions/WO-<number>/implementation-plan.md` (see [writing-implementation-plans.md](writing-implementation-plans.md) for structure and guidance).
 
 ## Guardrails
 

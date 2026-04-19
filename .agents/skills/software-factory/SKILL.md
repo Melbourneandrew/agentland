@@ -76,7 +76,7 @@ Work orders are the concrete development tasks decomposed from Blueprints. When 
 
 The start phase ([start-work-order.md](start-work-order.md)) includes instructions for initializing the execution directory, the checklist protocol, and guardrails.
 
-If `scratch/wo-execution/WO-<number>/` already exists, resume from it. Only initialize a new work order folder when one does not already exist.
+If `.wo-executions/WO-<number>/` already exists, resume from it. Only initialize a new work order folder when one does not already exist.
 
 ---
 
