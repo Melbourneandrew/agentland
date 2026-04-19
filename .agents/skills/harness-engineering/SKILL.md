@@ -30,7 +30,7 @@ If you build an API, you must build a script or test suite that allows the agent
 - **Hard Failures:** If an agent violates a rule, the CI system must block it. The error must be formatted so it can be injected directly back into the agent's context for fixing.
 
 ### 3. Agent Legibility (The "Context" Loop)
-Ensure that the codebase is readable for an LLM. Use high-level maps (like `AGENTS.md`) instead of sprawling documentation. Ensure that S3/DB dependencies can be run entirely offline via `docker-compose.agentland-services.yaml` so the agent never needs external credentials to exercise the system.
+Ensure that the codebase is readable for an LLM. Use high-level maps (like `AGENTS.md`) instead of sprawling documentation. Ensure that S3/DB dependencies can be run entirely offline via `docker-compose.services.yaml` so the agent never needs external credentials to exercise the system.
 
 ### 4. Living Documentation (`lat.md/`)
 The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress.
