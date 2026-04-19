@@ -3,3 +3,5 @@ scratch/
 node_modules/
 .DS_Store
 *.log
+lat.md/.vitepress/dist
+lat.md/.vitepress/cache

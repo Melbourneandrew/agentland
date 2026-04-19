@@ -9,14 +9,16 @@
 # All project-related scripts and checks should go through here.
 # We utilize scripts/quiet-run.sh to keep LLM context token usage down on successful runs.
 
-.PHONY: help check test build lint
+.PHONY: help check test build lint docs docs-build
 
 help:
 	@echo "Available commands:"
-	@echo "  make check    - Run all linters and tests via the token-efficient pre-commit hook"
-	@echo "  make lint     - Run only linters"
-	@echo "  make test     - Run only tests"
-	@echo "  make build    - Run only builds"
+	@echo "  make check      - Run all linters and tests via the token-efficient pre-commit hook"
+	@echo "  make lint       - Run only linters"
+	@echo "  make test       - Run only tests"
+	@echo "  make build      - Run all builds (including docs)"
+	@echo "  make docs       - Start the local VitePress documentation server"
+	@echo "  make docs-build - Build the documentation silently"
 
 # As the project grows, add specific lint/test/build tools here, wrapping them in quiet-run.sh
 # Example: ./scripts/quiet-run.sh "ESLint" npx eslint .
@@ -27,8 +29,15 @@ lint:
 test:
 	@./scripts/quiet-run.sh "Mock Test Suite" true
 
-build:
+build: docs-build
 	@./scripts/quiet-run.sh "Mock Build" true
+
+docs:
+	@echo "Starting local VitePress server at http://localhost:5173..."
+	@npm run docs:dev
+
+docs-build:
+	@./scripts/quiet-run.sh "VitePress Docs Build" npm run docs:build
 
 # Run everything as part of a pre-commit or CI check
 check: lint test build
