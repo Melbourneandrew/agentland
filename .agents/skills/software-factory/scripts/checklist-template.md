@@ -64,9 +64,10 @@ Execute the test plan using the `testing` agent skill. The `testing` skill is st
 - [ ] Frontend unit tests run/passing
 - [ ] E2E / browser use (Chrome MCP) tests run/passing
 
-### Requirements and Blueprint Validation
+### Requirements, Blueprints, and Harness Validation
 - [ ] All acceptance criteria from the work order and linked requirements are satisfied
 - [ ] Architecture is aligned with linked blueprints
+- [ ] **Agent Development Harness Updated:** A matching contribution to the repo was made (tests, hooks, simulation scripts) allowing the agent to run, exercise, and audit the new functionality completely.
 - [ ] Any drift is documented and reviewed with user
 
 ### Test Results Summary

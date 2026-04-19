@@ -1,0 +1,15 @@
+# Conventional pre-commit hook configuration
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+fail_fast: true # Stops at the first failure to save LLM tokens and time
+
+repos:
+  - repo: local
+    hooks:
+      - id: make-check
+        name: Run project make checks (Token-efficient)
+        entry: make check
+        language: system
+        pass_filenames: false
+        always_run: true

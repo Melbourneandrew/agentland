@@ -1,0 +1,135 @@
+services:
+  db:
+    image: pgvector/pgvector:0.8.0-pg15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  otel:
+    image: public.ecr.aws/aws-observability/aws-otel-collector:v0.43.0
+    environment:
+      AOT_CONFIG_CONTENT: |
+        receivers:
+          otlp:
+            protocols:
+              http:
+                endpoint: 0.0.0.0:4318
+
+        processors:
+          batch:
+            timeout: 5s
+            send_batch_size: 256
+          attributes/frontend:
+            actions:
+              - key: log.type
+                action: insert
+                value: frontend
+          filter/agent_sse:
+            logs:
+              include:
+                match_type: strict
+                record_attributes:
+                  - key: log.type
+                    value: agent_sse
+          filter/backend:
+            logs:
+              include:
+                match_type: strict
+                record_attributes:
+                  - key: log.type
+                    value: backend
+          filter/frontend:
+            logs:
+              include:
+                match_type: strict
+                record_attributes:
+                  - key: log.type
+                    value: frontend
+
+        exporters:
+          debug:
+            verbosity: detailed
+          debug/frontend:
+            verbosity: detailed
+          debug/agent_sse:
+            verbosity: detailed
+          debug/backend:
+            verbosity: detailed
+          otlphttp/loki:
+            endpoint: http://loki:3100/otlp
+            tls:
+              insecure: true
+
+        service:
+          pipelines:
+            traces:
+              receivers: [otlp]
+              processors: [batch]
+              exporters: [debug]
+            logs/frontend:
+              receivers: [otlp]
+              processors: [attributes/frontend, filter/frontend, batch]
+              exporters: [otlphttp/loki, debug/frontend]
+            logs/agent_sse:
+              receivers: [otlp]
+              processors: [filter/agent_sse, batch]
+              exporters: [otlphttp/loki, debug/agent_sse]
+            logs/backend:
+              receivers: [otlp]
+              processors: [filter/backend, batch]
+              exporters: [otlphttp/loki, debug/backend]
+    depends_on:
+      - loki
+    ports:
+      - "4318:4318"
+
+  loki:
+    image: grafana/loki:3.3.2
+    command: -config.file=/etc/loki/config.yml
+    volumes:
+      - ./infra/local/loki/loki/config.yml:/etc/loki/config.yml:ro
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres_data:
+  loki_data:
+  minio_data:

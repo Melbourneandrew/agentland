@@ -25,9 +25,10 @@ As a reviewer within the Software Factory, your primary role is to ensure that t
    - If reviewing frontend code or visual components, verify adherence to the agreed aesthetic direction and the `frontend-design` skill guidelines.
    - Check for production-grade design qualities: appropriate and distinct typography, cohesive color schemes, intentional layout and motion, and the explicit avoidance of generic "AI slop" or cookie-cutter design patterns.
 
-5. **Pre-commit Hooks & Automation:**
-   - Verify that updates to pre-commit hooks and project `Makefile` checks are proposed and made whenever possible.
-   - Ensure new conventions, build steps, tests, and linters are automatically enforced by extending the token-efficient hook system, preventing regressions and reducing manual verification steps.
+5. **Harness Engineering & Pre-commit Automation:**
+   - Verify that updates to pre-commit hooks, tests, and project `Makefile` checks are proposed and made whenever new functionality is introduced.
+   - According to the `harness-engineering` skill, ensure there is a matching contribution to the repo's harness that allows the agent to run, exercise, and audit the new functionality completely.
+   - Ensure new conventions, build steps, tests, and linters are automatically enforced by extending the token-efficient hook system (`.pre-commit-config.yaml` / `Makefile`), preventing regressions and reducing manual verification steps.
 
 ## Review Process
 
