@@ -38,10 +38,12 @@ Ensure that the codebase is readable for an LLM. Use high-level maps (like `AGEN
 When adding third-party services (Cloudflare, Stripe, Google OAuth), agents must follow these provisioning rules:
 - **Cloudflare (Infrastructure):** Use the `wrangler` CLI. Infrastructure is defined in `wrangler.toml`. Agents can use `wrangler tail` for monitoring and `wrangler dev` for local simulation. Actual deployment happens in CI/CD.
 - **Stripe (Payments & Billing):** Use the `stripe` CLI. Agents can use it to provision isolated environments via Stripe Projects (`stripe projects`), forward webhooks locally (`stripe listen`), and monitor logs (`stripe logs tail`).
-- **The "Human Handoff" Protocol (Google OAuth, etc.):** For services that require UI-based setup, domain verification, or anti-bot protected consoles (like creating a Google Cloud OAuth Client ID), the agent MUST NOT attempt to automate the browser. Instead:
+- **The "Human Handoff" Protocol (Google OAuth, etc.):** For services that require UI-based setup, domain verification, or anti-bot protected consoles (like creating a Google Cloud OAuth Client ID), the agent MUST NOT attempt to automate the browser. 
+  **CRITICAL FOR IDENTITY:** OAuth and external Identity Providers (IdP) are strictly for **deployed environments only**. Local development must implement a secure, configurable bypass (e.g., local mock tokens or a development-only admin login route) so the system can be exercised offline without external internet calls.
+  When it is time to set up the real IdP for deployment:
   1. The agent writes a concise, step-by-step markdown guide (e.g., `infra/google-oauth-setup.md`) with exact URLs for the human to follow.
   2. The agent creates a local script (e.g., `make setup-secrets`) that prompts the human to paste the resulting credentials (e.g., `CLIENT_ID` and `CLIENT_SECRET`).
-  3. The script automatically injects these into the local `.dev.vars` and uses `wrangler secret put` to provision them in Cloudflare.
+  3. The script automatically uses `wrangler secret put` to provision them in Cloudflare CI/CD securely.
 
 ### 5. Living Documentation (`lat.md/`)
 The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress.
