@@ -34,7 +34,16 @@ If you build an API, you must build a script or test suite that allows the agent
 ### 3. Agent Legibility (The "Context" Loop)
 Ensure that the codebase is readable for an LLM. Use high-level maps (like `AGENTS.md`) instead of sprawling documentation. Ensure that S3/DB dependencies can be run entirely offline via `docker-compose.services.yaml` so the agent never needs external credentials to exercise the system.
 
-### 4. Living Documentation (`lat.md/`)
+### 4. External Services & Provisioning
+When adding third-party services (Cloudflare, Stripe, Google OAuth), agents must follow these provisioning rules:
+- **Cloudflare (Infrastructure):** Use the `wrangler` CLI. Infrastructure is defined in `wrangler.toml`. Agents can use `wrangler tail` for monitoring and `wrangler dev` for local simulation. Actual deployment happens in CI/CD.
+- **Stripe (Payments & Billing):** Use the `stripe` CLI. Agents can use it to provision isolated environments via Stripe Projects (`stripe projects`), forward webhooks locally (`stripe listen`), and monitor logs (`stripe logs tail`).
+- **The "Human Handoff" Protocol (Google OAuth, etc.):** For services that require UI-based setup, domain verification, or anti-bot protected consoles (like creating a Google Cloud OAuth Client ID), the agent MUST NOT attempt to automate the browser. Instead:
+  1. The agent writes a concise, step-by-step markdown guide (e.g., `infra/google-oauth-setup.md`) with exact URLs for the human to follow.
+  2. The agent creates a local script (e.g., `make setup-secrets`) that prompts the human to paste the resulting credentials (e.g., `CLIENT_ID` and `CLIENT_SECRET`).
+  3. The script automatically injects these into the local `.dev.vars` and uses `wrangler secret put` to provision them in Cloudflare.
+
+### 5. Living Documentation (`lat.md/`)
 The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress.
 - **Document New Contributions:** Every new feature, service, or architectural component must be documented here.
 - **Document Conventions:** Any new codebase conventions, patterns, or harness engineering rules must be clearly explained so future agents can learn them.
