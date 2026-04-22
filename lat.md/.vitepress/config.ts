@@ -17,7 +17,8 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'Introduction', link: '/' },
-          { text: 'Architecture', link: '/architecture' }
+          { text: 'Architecture', link: '/architecture' },
+          { text: 'Agent Harness', link: '/harness' }
         ]
       }
     ],
