@@ -14,6 +14,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "lat.md": "^0.11.0",
     "vitepress": "^1.6.4"
   }
 }

@@ -37,6 +37,7 @@ gemini-ralph:
 
 lint:
 	@./scripts/quiet-run.sh "Basic syntax check" bash -n scripts/*.sh
+	@./scripts/quiet-run.sh "Lat.md Check" npx lat.md check
 
 test:
 	@./scripts/quiet-run.sh "Mock Test Suite" true

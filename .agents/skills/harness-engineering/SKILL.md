@@ -45,8 +45,11 @@ When adding third-party services (Cloudflare, Stripe, Google OAuth), agents must
   2. The agent creates a local script (e.g., `make setup-secrets`) that prompts the human to paste the resulting credentials (e.g., `CLIENT_ID` and `CLIENT_SECRET`).
   3. The script automatically uses `wrangler secret put` to provision them in Cloudflare CI/CD securely.
 
-### 5. Living Documentation (`lat.md/`)
-The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress.
-- **Document New Contributions:** Every new feature, service, or architectural component must be documented here.
-- **Document Conventions:** Any new codebase conventions, patterns, or harness engineering rules must be clearly explained so future agents can learn them.
-- **Bonus (Connections to Blueprints):** Whenever possible, explicitly link these documentation pages directly to the Software Factory Blueprints (`@BlueprintName`) that originated the architecture. This connects the original "plan" to the final "documentation."
+### 5. Living Documentation & Knowledge Graph (`lat.md/`)
+The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress. **This is not just a folder of markdown files; it is a bidirectional knowledge graph powered by the `lat.md` CLI.**
+
+- **Always Consult the Graph:** When starting a task, agents should read the relevant `lat.md` documentation to understand architectural constraints before writing code.
+- **Link Your Code (Backlinks):** When you implement a feature described in `lat.md`, you MUST add a backlink comment in the source code (e.g., `// @lat: [[harness#Agent Harness]]` for JS/TS, or `# @lat: ...` for Python). This proves the documentation is implemented.
+- **Link Your Docs:** Use Wiki-style links `[[filename#Section]]` when referencing other parts of the documentation.
+- **Formatting Rules:** `lat.md` strictly enforces formatting. Every section must have a leading paragraph of ≤250 characters summarizing the section. 
+- **Enforcement:** The `lat.md check` command is strictly enforced in `make check` (our pre-commit and CI hook). If you break a link or fail to conform to the markdown rules, the commit will be blocked. You MUST run `npx lat.md check` to verify your documentation and code changes.

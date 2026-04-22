@@ -30,6 +30,11 @@ As a reviewer within the Software Factory, your primary role is to ensure that t
    - According to the `harness-engineering` skill, ensure there is a matching contribution to the repo's harness that allows the agent to run, exercise, and audit the new functionality completely.
    - Ensure new conventions, build steps, tests, and linters are automatically enforced by extending the token-efficient hook system (`.pre-commit-config.yaml` / `Makefile`), preventing regressions and reducing manual verification steps.
 
+6. **Living Documentation (`lat.md`):**
+   - Ensure new architectural choices are documented in `lat.md/`.
+   - Verify the PR passes `npx lat.md check`.
+   - Ensure the new source code uses backlink comments (e.g., `// @lat: [[section]]`) pointing back to the documentation.
+
 ## Review Process
 
 When asked to review a feature or document:

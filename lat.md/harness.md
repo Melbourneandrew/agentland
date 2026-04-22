@@ -10,17 +10,24 @@ An AI agent's performance is determined by its surrounding environment (the harn
 
 ## Harness Components
 
+The harness comprises several distinct tools and automated checks designed to keep agents on track without manual intervention.
+
 ### The Gemini Ralph Loop
 The adversarial orchestration system located at `scripts/gemini-ralph/gemini-ralph.sh`. 
+
 It surveys outstanding Work Orders and spawns pairs of agents to execute them:
 1. **Worker Agent**: Completes the implementation and opens a Pull Request.
 2. **Reviewer Agent**: Audits the PR against architectural blueprints and test requirements.
 
 ### Token-Efficient Automation
-To preserve the LLM's context window, all local development runs through the root `Makefile`. Commands are wrapped in `scripts/quiet-run.sh`, which suppresses output on success and only dumps verbose logs on failure. This ensures agents aren't blinded by walls of successful test output.
+To preserve the LLM's context window, all local development runs through the root `Makefile`. 
+
+Commands are wrapped in `scripts/quiet-run.sh`, which suppresses output on success and only dumps verbose logs on failure. This ensures agents aren't blinded by walls of successful test output.
 
 ### Pre-commit Constraints (Hard Failures)
-All conventions, tests, and linters must be added to `.pre-commit-config.yaml`. This creates a "Hard Failure" constraint—if an agent writes code that violates the harness, the commit fails, and the exact error is injected back into the agent's context for immediate repair.
+All conventions, tests, and linters must be added to `.pre-commit-config.yaml`. 
+
+This creates a "Hard Failure" constraint. If an agent writes code that violates the harness, the commit fails. The exact error is then injected back into the agent's context for immediate repair.
 
 ### External Provisioning & Services
 The harness enforces strict rules for interacting with third-party infrastructure:
