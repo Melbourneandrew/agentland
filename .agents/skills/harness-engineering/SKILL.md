@@ -48,6 +48,12 @@ When adding third-party services (Cloudflare, Stripe, Google OAuth), agents must
 ### 5. Living Documentation & Knowledge Graph (`lat.md/`)
 The project's public-facing and architectural documentation is stored in the `lat.md/` directory and deployed via VitePress. **This is not just a folder of markdown files; it is a bidirectional knowledge graph powered by the `lat.md` CLI.**
 
+**Documentation Separation of Concerns:**
+To maintain a scalable and self-improving harness, we strictly separate *what* we build, *how* we operate, and our *codebase conventions*:
+- **`lat.md/` (Codebase Conventions):** This graph is EXCLUSIVELY for storing codebase conventions, architectural patterns, and structural rules (e.g., how to build a component, how routing works, how to use the DB). Agents should look here to learn the rules of the repo.
+- **Requirements & Blueprints (Specifications):** These define *what* to build for a specific feature. They are the inputs to the Software Factory. `lat.md` is NOT for specifications.
+- **`.agents/skills/` (Agent Workflows):** Skills define *how* the agent should operate (e.g., how to run a test, how to review a PR, how to use the software factory). Skills and rules can be added or updated to trigger the agent to go look for specific documentation in `lat.md/`.
+
 - **Always Consult the Graph:** When starting a task, agents should read the relevant `lat.md` documentation to understand architectural constraints before writing code.
 - **Link Your Code (Backlinks):** When you implement a feature described in `lat.md`, you MUST add a backlink comment in the source code (e.g., `// @lat: [[harness#Agent Harness]]` for JS/TS, or `# @lat: ...` for Python). This proves the documentation is implemented.
 - **Link Your Docs:** Use Wiki-style links `[[filename#Section]]` when referencing other parts of the documentation.

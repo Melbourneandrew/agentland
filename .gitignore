@@ -6,3 +6,8 @@ node_modules/
 lat.md/.vitepress/dist
 lat.md/.vitepress/cache
 .agents/mcp.json
+.gemini/
+.cursor/
+.aider/
+.claude/
+.cline/
