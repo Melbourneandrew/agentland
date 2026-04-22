@@ -23,6 +23,7 @@ log() {
 run_gemini_with_retry() {
   local prompt_file="$1"
   local log_file="$2"
+  local telemetry_file="${log_file%.log}.telemetry.log"
   local max_attempts=5
   local attempt=1
   local sleep_time=30
@@ -32,6 +33,9 @@ run_gemini_with_retry() {
     set +e
     (
       cd "${REPO_ROOT}"
+      GEMINI_TELEMETRY_ENABLED="true" \
+      GEMINI_TELEMETRY_TARGET="local" \
+      GEMINI_TELEMETRY_OUTFILE="${telemetry_file}" \
       "${GEMINI_CMD}" \
         --model "${GEMINI_MODEL}" \
         --approval-mode="${GEMINI_APPROVAL_MODE}" \
