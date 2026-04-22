@@ -5,3 +5,4 @@ node_modules/
 *.log
 lat.md/.vitepress/dist
 lat.md/.vitepress/cache
+.agents/mcp.json
